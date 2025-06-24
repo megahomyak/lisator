@@ -1,8 +1,8 @@
-Builds a grid of a fox from foxes/{file_name}, puts it into compiled/{file_name}
+Builds a grid of a fox from foxes/{dir_name}, puts it into compiled/{dir_name}
 
 REQUIREMENTS:
 * inkscape
 * python
 
 USAGE:
-python lisator.py {file_name}
+python lisator.py {dir_name}

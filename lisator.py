@@ -29,3 +29,7 @@ with open(f"compiled/{file_name}.svg", "w") as f:
         tag("rect", f'width="100%" height="100%" fill="url(#foxPattern)"').add()
 
 os.system(f"inkscape --export-type=png --export-filename=rendered/{file_name} --export-dpi=600 compiled/{file_name}.svg")
+FOXES_BACK_INPUT = "foxes_back.svg"
+FOXES_BACK_OUTPUT = "foxes_back.png"
+if not os.path.exists(FOXES_BACK_OUTPUT):
+    os.system(f"inkscape --export-type=png --export-filename={FOXES_BACK_OUTPUT} --export-dpi=300 {FOXES_BACK_INPUT}")

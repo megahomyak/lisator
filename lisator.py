@@ -4,6 +4,11 @@ import os
 file_name = sys.argv[1]
 for dir_ in ["compiled", "rendered"]:
     os.makedirs(dir_, exist_ok=True)
+def get_wh(path): # Stolen from https://stackoverflow.com/a/20380514
+    with open(fname, 'rb') as f:
+        head = f.read(24)
+        width, height = struct.unpack('>ii', head[16:24])
+        return width, height
 with open(f"compiled/{file_name}.svg", "w") as f:
     class tag:
         def __init__(self, name, attrs=None):

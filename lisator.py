@@ -18,13 +18,12 @@ class tag:
 PAGEWIDTH_MM = 210
 PAGEHEIGHT_MM = 297
 f.write('<?xml version="1.0" encoding="UTF-8"?>')
-with tag("svg", f'width="{PAGEWIDTH_MM}mm" height="{PAGEHEIGHT_MM}mm" version="1.1"'):
-    XFOXES = 8
-    foxwidth = PAGEWIDTH_MM / XFOXES
-    for x in range(0, XFOXES):
-        x = x * foxwidth
+with tag("svg", f'width="{PAGEWIDTH_MM}mm" height="{PAGEHEIGHT_MM}mm" version="1.1" viewBox="0 0 {PAGEWIDTH_MM} {PAGEHEIGHT_MM}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"'):
+    with tag("defs"):
+        XFOXES = 8
+        foxwidth = PAGEWIDTH_MM / XFOXES
         YFOXES = 16
-        foxheight = PAGEWIDTH_MM / XFOXES
-        for y in range(0, YFOXES):
-            y = y * foxheight
-            tag("image", f'href="foxes/{file_name}" x="{x}mm" y="{y}mm" width="{foxwidth}mm" height="{foxheight}mm"').add()
+        foxheight = PAGEHEIGHT_MM / YFOXES
+        with tag("pattern", f'id="foxPattern" patternUnits="userSpaceOnUse" width="{foxwidth}" height="{foxheight}"'):
+            tag("image", f'xlink:href="{os.getcwd()}/foxes/{file_name}" width="{foxwidth}" height="{foxheight}" preserveAspectRatio="none"').add()
+    tag("rect", f'width="100%" height="100%" fill="url(#foxPattern)"').add()

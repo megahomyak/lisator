@@ -1,7 +1,6 @@
 import sys
 import os
 import json
-import struct
 
 dir_name = sys.argv[1]
 for dir_ in ["compiled", "rendered"]:
@@ -12,12 +11,6 @@ j = json.load(open(f"foxes/{dir_name}/pattern.json"))
 cols = j["cols"]
 rows = j["rows"]
 del j
-with open(f"foxes/{dir_name}/image.png", 'rb') as fhandle: # Stolen from https://stackoverflow.com/a/20380514
-    head = fhandle.read(24)
-    width, height = struct.unpack('>ii', head[16:24])
-total_width_px = width*cols
-dpi = total_width_px / (PAGEWIDTH_MM * 0.0393700787)
-print(f"{dpi = }")
 def generate(side):
     with open(f"compiled/{dir_name}/{side}.svg", "w") as f:
         class tag:
@@ -45,5 +38,5 @@ def generate(side):
 generate("front")
 generate("back")
 
-os.system(f"inkscape --export-type=png --export-filename=rendered/{dir_name}/front.png --export-dpi={int(dpi)} compiled/{dir_name}/front.svg")
+os.system(f"inkscape --export-type=png --export-filename=rendered/{dir_name}/front.png --export-dpi=600 compiled/{dir_name}/front.svg")
 os.system(f"inkscape --export-type=png --export-filename=rendered/{dir_name}/back.png --export-dpi=300 compiled/{dir_name}/back.svg")

@@ -3,12 +3,12 @@
 
 <svg
    width="26.25mm"
-   height="18.562mm"
-   viewBox="0 0 26.25 18.562"
+   height="9mm"
+   viewBox="0 0 26.25 9"
    version="1.1"
    id="svg12205"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   sodipodi:docname="foxes_back.svg"
+   sodipodi:docname="sticker_back.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="2.9446654"
-     inkscape:cx="174.55294"
-     inkscape:cy="15.961067"
+     inkscape:cx="145.00799"
+     inkscape:cy="15.961066"
      inkscape:window-width="1920"
      inkscape:window-height="976"
      inkscape:window-x="0"
@@ -56,12 +56,12 @@
        style="fill:#ffffff;stroke-width:0.264583"
        id="rect4104"
        width="26.25"
-       height="18.562"
+       height="9"
        x="0"
        y="0" />
     <g
        id="g2254"
-       transform="translate(-0.16366767,0.10170031)">
+       transform="translate(-0.16366767,-4.6792998)">
       <g
          aria-label="ЭТО НАКЛЕЙКА"
          transform="matrix(0.28347534,0,0,0.22427453,-19.567268,-14.454034)"

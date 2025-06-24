@@ -1,26 +1,16 @@
 import sys
 import os
+import json
 
 file_name = sys.argv[1]
 for dir_ in ["compiled", "rendered"]:
     os.makedirs(dir_, exist_ok=True)
-def get_wh(path): # Stolen from https://stackoverflow.com/a/20380514
-    with open(fname, 'rb') as f:
-        head = f.read(24)
-        width, height = struct.unpack('>ii', head[16:24])
-        return width, height
 PAGEWIDTH_MM = 210
 PAGEHEIGHT_MM = 297
-proportions = []
-with open("allowable_proportions.txt", "w") as f:
-    for ycount in range(11, 16 + 1):
-        for xcount in range(8, 11 + 1):
-            w = PAGEWIDTH_MM/xcount
-            h = PAGEHEIGHT_MM/ycount
-            proportions.append(xcount, ycount, h/w)
-            f.write(f"{h}:{w}\n")
-w, h = get_wh(f"foxes/{file_name}")
-min(proportions, key=lambda p: min(abs(p - h/w), abs(p - w/h)))
+j = json.load(open(f"foxes/{file_name}.json"))
+cols = j["cols"]
+rows = j["rows"]
+del j
 with open(f"compiled/{file_name}.svg", "w") as f:
     class tag:
         def __init__(self, name, attrs=None):
@@ -35,10 +25,8 @@ with open(f"compiled/{file_name}.svg", "w") as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>')
     with tag("svg", f'width="{PAGEWIDTH_MM}mm" height="{PAGEHEIGHT_MM}mm" version="1.1" viewBox="0 0 {PAGEWIDTH_MM} {PAGEHEIGHT_MM}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"'):
         with tag("defs"):
-            XFOXES = 8
-            foxwidth = PAGEWIDTH_MM / XFOXES
-            YFOXES = 16
-            foxheight = PAGEHEIGHT_MM / YFOXES
+            foxwidth = PAGEWIDTH_MM / cols
+            foxheight = PAGEHEIGHT_MM / rows
             with tag("pattern", f'id="foxPattern" patternUnits="userSpaceOnUse" width="{foxwidth}" height="{foxheight}"'):
                 tag("image", f'xlink:href="{os.getcwd()}/foxes/{file_name}" width="{foxwidth}" height="{foxheight}" preserveAspectRatio="none"').add()
         tag("rect", f'width="100%" height="100%" fill="url(#foxPattern)"').add()
